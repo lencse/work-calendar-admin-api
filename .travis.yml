@@ -1,0 +1,13 @@
+language: php
+php:
+    - 7
+cache:
+    directories:
+        - $HOME/.composer/cache/files
+before_install:
+    - composer self-update
+before_script:
+    - cp app/config/parameters.yml.travis app/config/parameters.yml
+    - composer install --no-interaction
+script:
+    - composer test
