@@ -10,4 +10,4 @@ before_script:
     - cp app/config/parameters.yml.travis app/config/parameters.yml
     - composer install --no-interaction
 script:
-    - composer test
+    - composer test-all

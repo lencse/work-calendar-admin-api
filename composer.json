@@ -1,6 +1,6 @@
 {
-    "name": "lencse/admin-api",
-    "license": "proprietary",
+    "name": "lencse/work-calendar-admin-api",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -20,7 +20,7 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.1",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
@@ -33,12 +33,21 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
+        "lencse/ci-tools": "^2.0",
+        "phpmd/phpmd": "^2.6",
         "phpunit/phpunit": "^6.3",
         "sensio/generator-bundle": "^3.0",
+        "squizlabs/php_codesniffer": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {
         "test": "phpunit",
+        "test-all": [
+            "phpunit",
+            "ci-test-coverage --min-coverage 95 --clover-file build/logs/clover.xml",
+            "phpmd src/ text phpmd.xml",
+            "phpcs --standard=PSR2 src tests"
+        ],
         "symfony-scripts": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
