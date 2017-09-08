@@ -4,7 +4,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle"
+            "AppBundle\\": "src/AppBundle",
+            "Lencse\\WorkCalendar\\Api\\": "src/Lencse/WorkCalendar/Api"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -24,6 +25,8 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
+        "lencse/work-calendar-core": "dev-dev",
+        "neomerx/json-api": "^1.0",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
         "symfony/monolog-bundle": "^3.1.0",
