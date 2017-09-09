@@ -7,6 +7,16 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class DefaultControllerTest extends WebTestCase
 {
 
+    public function testMain()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/');
+
+        $response = $client->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+
     public function testStatus()
     {
         $client = static::createClient();

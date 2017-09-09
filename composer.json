@@ -1,5 +1,6 @@
 {
     "name": "lencse/work-calendar-admin-api",
+    "description": "Work calendar admin API",
     "license": "MIT",
     "type": "project",
     "autoload": {

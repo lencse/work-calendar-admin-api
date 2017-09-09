@@ -11,6 +11,16 @@ class DefaultController extends Controller
 {
 
     /**
+     * @Route("/")
+     *
+     * @return Response
+     */
+    public function mainRouteAction(): Response
+    {
+        return $this->redirectToRoute('app_default_status');
+    }
+
+    /**
      * @Route("/status")
      *
      * @return Response
