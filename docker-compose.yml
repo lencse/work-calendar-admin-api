@@ -1,7 +1,7 @@
 nginx:
     build: docker/nginx
     ports:
-        - 80:80
+        - 8210:80
     links:
         - php
     volumes:
