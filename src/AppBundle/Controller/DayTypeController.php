@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\JsonApi\JsonApi;
 use Lencse\WorkCalendar\Api\JsonApi\DayTypeSchema;
 use Lencse\WorkCalendar\Day\DayType;
 use Neomerx\JsonApi\Encoder\Encoder;
@@ -12,25 +13,42 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/day-type")
+ * @Route("/api/day-type")
  */
 class DayTypeController extends Controller
 {
 
     /**
-     * @Route("/")
+     * @var JsonApi
      */
-    public function listAction()
-    {
-        $types = DayType::getAllTypes();
-        $encoder = Encoder::instance([
-            DayType::class => DayTypeSchema::class
-        ], new EncoderOptions(JSON_PRETTY_PRINT, '/'));
+    private $jsonApi;
 
-        return Response::create(
-            $encoder->encodeData($types),
-            200,
-            ['Content-Type' => MediaType::JSON_API_MEDIA_TYPE]
-        );
+    /**
+     * @param JsonApi $jsonApi
+     */
+    public function __construct(JsonApi $jsonApi)
+    {
+        $this->jsonApi = $jsonApi;
+    }
+
+    /**
+     * @Route("/")
+     *
+     * @return Response
+     */
+    public function listAction(): Response
+    {
+        return $this->jsonApi->response(DayType::getAllTypes());
+    }
+
+    /**
+     * @Route("/{key}")
+     *
+     * @param string $key
+     * @return Response
+     */
+    public function showAction($key): Response
+    {
+        return $this->jsonApi->response(DayType::get($key));
     }
 }

@@ -12,8 +12,10 @@ class DefaultController extends Controller
 
     /**
      * @Route("/status")
+     *
+     * @return Response
      */
-    public function statusAction()
+    public function statusAction(): Response
     {
         return $this->json([
             'code' => Response::HTTP_OK,

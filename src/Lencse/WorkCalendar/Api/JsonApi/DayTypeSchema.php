@@ -42,12 +42,4 @@ class DayTypeSchema extends SchemaProvider
             'is-rest-day' => $resource->isRestDay(),
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function getResourceLinks($resource)
-    {
-        return [];
-    }
 }
