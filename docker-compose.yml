@@ -8,7 +8,32 @@ nginx:
         - ./:/app
 
 php:
-    image: php:7.1-fpm
+    build: docker/php
     volumes:
         - ./:/app
     working_dir: /app
+    links:
+        - sql
+    environment:
+        - WCADMINAPI_DB_HOST=sql
+        - WCADMINAPI_DB_PORT=5432
+        - WCADMINAPI_DB_NAME=postgres
+        - WCADMINAPI_DB_USER=postgres
+        - WCADMINAPI_DB_PASSWORD=postgres
+        - WCADMINAPI_SYMFONY_SECRET=5dd4e730b27106e262fce0e344bcdcff9634695a
+        - WCADMINAPI_FRONTEND_URL=http://localhost:8211
+
+sql:
+    ports:
+        - 5432:5432
+    image: postgres:latest
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+
+adminer:
+    image: adminer:latest
+    ports:
+        - 8080:8080
+    links:
+        - sql

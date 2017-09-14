@@ -2,11 +2,11 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host: 127.0.0.1
-    database_port: ~
-    database_name: symfony
-    database_user: root
-    database_password: ~
+    database_host: "%env(WCADMINAPI_DB_HOST)%"
+    database_port: "%env(WCADMINAPI_DB_PORT)%"
+    database_name: "%env(WCADMINAPI_DB_NAME)%"
+    database_user: "%env(WCADMINAPI_DB_USER)%"
+    database_password: "%env(WCADMINAPI_DB_PASSWORD)%"
     # You should uncomment this if you want to use pdo_sqlite
     #database_path: '%kernel.project_dir%/var/data/data.sqlite'
 
@@ -16,4 +16,6 @@ parameters:
     mailer_password: ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret: b6bf85a49a1340a5bc0271a735cd6ddfd6a3475d
+    secret: "%env(WCADMINAPI_SYMFONY_SECRET)%"
+
+    frontend_url: "%env(WCADMINAPI_FRONTEND_URL)%"

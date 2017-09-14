@@ -33,3 +33,10 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    wcadmin_kernel_listener:
+        class: AppBundle\Event\KernelListener
+        arguments:
+            - '%frontend_url%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
