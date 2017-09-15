@@ -1,14 +1,14 @@
 <?php
 
-namespace Lencse\WorkCalendar\Api\JsonApi;
+namespace AppBundle\JsonApi;
 
-use Lencse\WorkCalendar\Day\DayType;
+use AppBundle\Entity\Year;
 use Neomerx\JsonApi\Schema\SchemaProvider;
 
-class DayTypeSchema extends SchemaProvider
+class YearSchema extends SchemaProvider
 {
 
-    const RESOURCE = 'day-type';
+    const RESOURCE = 'year';
 
     /**
      * @var string
@@ -18,28 +18,27 @@ class DayTypeSchema extends SchemaProvider
     /**
      * Get resource identity.
      *
-     * @param DayType $resource
+     * @param Year $resource
      *
      * @return string
      */
     public function getId($resource)
     {
-        return $resource->getKey();
+        return $resource->getYear();
     }
 
     /**
      * Get resource attributes.
      *
-     * @param DayType $resource
+     * @param Year $resource
      *
      * @return array
      */
     public function getAttributes($resource)
     {
         return [
-            'key' => $resource->getKey(),
-            'name' => $resource->getName(),
-            'is-rest-day' => $resource->isRestDay(),
+            'year' => $resource->getYear(),
+            'is-enabled' => $resource->isEnabled(),
         ];
     }
 }

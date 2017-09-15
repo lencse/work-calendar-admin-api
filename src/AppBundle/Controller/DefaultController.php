@@ -21,7 +21,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/status")
+     * @Route("/status", methods={"GET"})
      *
      * @return Response
      */

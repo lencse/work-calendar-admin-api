@@ -2,7 +2,7 @@
 
 namespace AppBundle\JsonApi;
 
-use Lencse\WorkCalendar\Api\JsonApi\DayTypeSchema;
+use AppBundle\Entity\Year;
 use Lencse\WorkCalendar\Day\DayType;
 use Neomerx\JsonApi\Encoder\Encoder;
 use Neomerx\JsonApi\Encoder\EncoderOptions;
@@ -21,7 +21,8 @@ class JsonApi
      * @var string[]
      */
     private $mapping = [
-        DayType::class => DayTypeSchema::class
+        DayType::class => DayTypeSchema::class,
+        Year::class => YearSchema::class,
     ];
 
     public function __construct()

@@ -3,15 +3,15 @@
 namespace AppBundle\Controller;
 
 use AppBundle\JsonApi\JsonApi;
-use Lencse\WorkCalendar\Day\DayType;
+use AppBundle\Entity\Year;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/api/day-type")
+ * @Route("/api/year")
  */
-class DayTypeController extends Controller
+class YearController extends Controller
 {
 
     /**
@@ -34,17 +34,19 @@ class DayTypeController extends Controller
      */
     public function listAction(): Response
     {
-        return $this->jsonApi->response(DayType::getAllTypes());
+        $years = $this->getDoctrine()->getManager()->getRepository(Year::class)->findAll();
+        return $this->jsonApi->response($years);
     }
 
     /**
-     * @Route("/{key}", methods={"GET"})
+     * @Route("/{year}", methods={"GET"})
      *
-     * @param string $key
+     * @param int $year
      * @return Response
      */
-    public function showAction($key): Response
+    public function showAction($year): Response
     {
-        return $this->jsonApi->response(DayType::get($key));
+        $year = $this->getDoctrine()->getManager()->getRepository(Year::class)->find($year);
+        return $this->jsonApi->response($year);
     }
 }

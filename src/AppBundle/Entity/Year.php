@@ -22,9 +22,9 @@ class Year
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", name="is_active", nullable=false)
+     * @ORM\Column(type="boolean", name="is_enabled", nullable=false)
      */
-    private $isActive = false;
+    private $isEnabled = false;
 
     /**
      * @return int
@@ -47,18 +47,18 @@ class Year
     /**
      * @return bool
      */
-    public function isActive(): bool
+    public function isEnabled(): bool
     {
-        return $this->isActive;
+        return $this->isEnabled;
     }
 
     /**
-     * @param bool $isActive
+     * @param bool $isEnabled
      * @return Year
      */
-    public function setIsActive(bool $isActive): Year
+    public function setIsEnabled(bool $isEnabled): Year
     {
-        $this->isActive = $isActive;
+        $this->isEnabled = $isEnabled;
         return $this;
     }
 }
