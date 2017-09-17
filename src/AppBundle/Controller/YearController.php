@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/api/year")
+ * @Route("/api/years")
  */
 class YearController extends Controller
 {

@@ -12,7 +12,7 @@ class IrregularDayEntity
 {
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -30,7 +30,7 @@ class IrregularDayEntity
     /**
      * @var string
      *
-     * ORM\@ORM\Column(type="string", name="type_key", length="40", nullable=false)
+     * @ORM\Column(type="string", name="type_key", length=40, nullable=false)
      */
     private $typeKey;
 
@@ -42,7 +42,7 @@ class IrregularDayEntity
     private $description;
 
     /**
-     * @return string
+     * @return int
      */
     public function getId(): string
     {
@@ -50,7 +50,7 @@ class IrregularDayEntity
     }
 
     /**
-     * @param string $id
+     * @param int $id
      * @return IrregularDayEntity
      */
     public function setId(string $id): IrregularDayEntity
@@ -100,7 +100,7 @@ class IrregularDayEntity
      */
     public function getDescription(): string
     {
-        return $this->description;
+        return $this->description ?: '';
     }
 
     /**

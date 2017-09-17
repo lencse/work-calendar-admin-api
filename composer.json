@@ -5,8 +5,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle",
-            "Lencse\\WorkCalendar\\Api\\": "src/Lencse/WorkCalendar/Api"
+            "AppBundle\\": "src/AppBundle"
         },
         "classmap": [
             "app/AppKernel.php",

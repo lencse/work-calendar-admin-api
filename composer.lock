@@ -1001,12 +1001,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lencse/work-calendar-core.git",
-                "reference": "182a574278954237c452ec4ca4699e0e45ba5846"
+                "reference": "be9cec53c374a80c4236001912e3ca952e081280"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lencse/work-calendar-core/zipball/182a574278954237c452ec4ca4699e0e45ba5846",
-                "reference": "182a574278954237c452ec4ca4699e0e45ba5846",
+                "url": "https://api.github.com/repos/lencse/work-calendar-core/zipball/be9cec53c374a80c4236001912e3ca952e081280",
+                "reference": "be9cec53c374a80c4236001912e3ca952e081280",
                 "shasum": ""
             },
             "require": {
@@ -1036,7 +1036,7 @@
                 }
             ],
             "description": "Work calendar core library",
-            "time": "2017-09-08 18:48:33"
+            "time": "2017-09-17 09:00:10"
         },
         {
             "name": "monolog/monolog",

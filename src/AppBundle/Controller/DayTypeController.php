@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/api/day-type")
+ * @Route("/api/day-types")
  */
 class DayTypeController extends Controller
 {
@@ -34,7 +34,7 @@ class DayTypeController extends Controller
      */
     public function listAction(): Response
     {
-        return $this->jsonApi->response(DayType::getAllTypes());
+        return $this->jsonApi->response(DayType::getIrregulars());
     }
 
     /**

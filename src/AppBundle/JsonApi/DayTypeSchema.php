@@ -8,7 +8,7 @@ use Neomerx\JsonApi\Schema\SchemaProvider;
 class DayTypeSchema extends SchemaProvider
 {
 
-    const RESOURCE = 'day-type';
+    const RESOURCE = 'day-types';
 
     /**
      * @var string
