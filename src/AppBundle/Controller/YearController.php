@@ -6,6 +6,8 @@ use AppBundle\JsonApi\JsonApi;
 use AppBundle\Entity\Year;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -39,7 +41,24 @@ class YearController extends Controller
     }
 
     /**
-     * @Route("/{year}", methods={"GET"})
+     * @Route("/", methods={"POST"})
+     *
+     * @return Response
+     */
+    public function createAction(Request $request): Response
+    {
+        $year = new Year();
+        $data = json_decode($request->getContent(), true)['data'];
+        $year->setYear($data['attributes']['year']);
+        $year->setIsEnabled($data['attributes']['is-enabled']);
+        $this->getDoctrine()->getManager()->persist($year);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->jsonApi->response($year);
+    }
+
+    /**
+     * @Route("/{year}")
+     * @Method("GET")
      *
      * @param int $year
      * @return Response
@@ -48,5 +67,37 @@ class YearController extends Controller
     {
         $year = $this->getDoctrine()->getManager()->getRepository(Year::class)->find($year);
         return $this->jsonApi->response($year);
+    }
+
+    /**
+     * @Route("/{year}")
+     * @Method("PUT")
+     *
+     * @param int $year
+     * @return Response
+     */
+    public function updateAction(Request $request, $year): Response
+    {
+        $year = $this->getDoctrine()->getManager()->getRepository(Year::class)->find($year);
+        $data = json_decode($request->getContent(), true)['data'];
+        $year->setIsEnabled($data['attributes']['is-enabled']);
+        $this->getDoctrine()->getManager()->persist($year);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->jsonApi->response($year);
+    }
+
+    /**
+     * @Route("/{year}")
+     * @Method("OPTIONS")
+     *
+     * @param int $year
+     * @return Response
+     */
+    public function optionsAction($year): Response
+    {
+        return new Response('', Response::HTTP_OK, [
+            'Access-Control-Allow-Methods' => 'OPTIONS, GET, PUT',
+            'Allow' => 'OPTIONS, GET, PUT'
+        ]);
     }
 }

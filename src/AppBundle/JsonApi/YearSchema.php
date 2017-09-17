@@ -8,7 +8,7 @@ use Neomerx\JsonApi\Schema\SchemaProvider;
 class YearSchema extends SchemaProvider
 {
 
-    const RESOURCE = 'year';
+    const RESOURCE = 'years';
 
     /**
      * @var string
