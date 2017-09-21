@@ -106,6 +106,21 @@ class IrregularDayController extends Controller
 
     /**
      * @Route("/{id}")
+     * @Method("DELETE")
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function deleteAction($id): Response
+    {
+        $day = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->find($id);
+        $this->getDoctrine()->getManager()->remove($day);
+        $this->getDoctrine()->getManager()->flush();
+        return new Response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @Route("/{id}")
      * @Method("OPTIONS")
      *
      * @param int $id
@@ -114,8 +129,7 @@ class IrregularDayController extends Controller
     public function optionsAction($id): Response
     {
         return new Response('', Response::HTTP_OK, [
-            'Access-Control-Allow-Methods' => 'OPTIONS, GET, PUT',
-            'Allow' => 'OPTIONS, GET, PUT'
+            'Access-Control-Allow-Methods' => 'OPTIONS, GET, PUT, DELETE',
         ]);
     }
 }
