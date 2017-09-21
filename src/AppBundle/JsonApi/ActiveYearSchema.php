@@ -2,13 +2,13 @@
 
 namespace AppBundle\JsonApi;
 
-use AppBundle\Entity\Year;
+use AppBundle\Entity\ActiveYear;
 use Neomerx\JsonApi\Schema\SchemaProvider;
 
-class YearSchema extends SchemaProvider
+class ActiveYearSchema extends SchemaProvider
 {
 
-    const RESOURCE = 'years';
+    const RESOURCE = 'active-years';
 
     /**
      * @var string
@@ -18,7 +18,7 @@ class YearSchema extends SchemaProvider
     /**
      * Get resource identity.
      *
-     * @param Year $resource
+     * @param ActiveYear $resource
      *
      * @return string
      */
@@ -30,7 +30,7 @@ class YearSchema extends SchemaProvider
     /**
      * Get resource attributes.
      *
-     * @param Year $resource
+     * @param ActiveYear $resource
      *
      * @return array
      */
@@ -38,7 +38,6 @@ class YearSchema extends SchemaProvider
     {
         return [
             'year' => $resource->getYear(),
-            'is-enabled' => $resource->isEnabled(),
         ];
     }
 }

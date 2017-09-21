@@ -82,36 +82,40 @@ class IrregularDayController extends Controller
         $day = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->find($id);
         return $this->jsonApi->response($day);
     }
-//
-//    /**
-//     * @Route("/{year}")
-//     * @Method("PUT")
-//     *
-//     * @param int $year
-//     * @return Response
-//     */
-//    public function updateAction(Request $request, $year): Response
-//    {
-//        $year = $this->getDoctrine()->getManager()->getRepository(Year::class)->find($year);
-//        $data = json_decode($request->getContent(), true)['data'];
-//        $year->setIsEnabled($data['attributes']['is-enabled']);
-//        $this->getDoctrine()->getManager()->persist($year);
-//        $this->getDoctrine()->getManager()->flush();
-//        return $this->jsonApi->response($year);
-//    }
-//
-//    /**
-//     * @Route("/{year}")
-//     * @Method("OPTIONS")
-//     *
-//     * @param int $year
-//     * @return Response
-//     */
-//    public function optionsAction($year): Response
-//    {
-//        return new Response('', Response::HTTP_OK, [
-//            'Access-Control-Allow-Methods' => 'OPTIONS, GET, PUT',
-//            'Allow' => 'OPTIONS, GET, PUT'
-//        ]);
-//    }
+
+    /**
+     * @Route("/{id}")
+     * @Method("PUT")
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function updateAction(Request $request, $id): Response
+    {
+        $day = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->find($id);
+        $data = json_decode($request->getContent(), true)['data'];
+        $date = \DateTime::createFromFormat('Y-m-d', substr($data['attributes']['date'], 0, 10));
+        $day->setTypeKey($data['attributes']['type-key']);
+        $day->setDescription($data['attributes']['description']);
+        $day->setDate($date);
+        $day->setTypeKey($data['attributes']['type-key']);
+        $this->getDoctrine()->getManager()->persist($day);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->jsonApi->response($day);
+    }
+
+    /**
+     * @Route("/{id}")
+     * @Method("OPTIONS")
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function optionsAction($id): Response
+    {
+        return new Response('', Response::HTTP_OK, [
+            'Access-Control-Allow-Methods' => 'OPTIONS, GET, PUT',
+            'Allow' => 'OPTIONS, GET, PUT'
+        ]);
+    }
 }
