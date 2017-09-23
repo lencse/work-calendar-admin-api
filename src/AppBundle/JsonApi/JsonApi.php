@@ -3,7 +3,7 @@
 namespace AppBundle\JsonApi;
 
 use AppBundle\Entity\IrregularDayEntity;
-use AppBundle\Entity\ActiveYear;
+use AppBundle\Entity\PublicationData;
 use Lencse\WorkCalendar\Day\DayType;
 use Neomerx\JsonApi\Encoder\Encoder;
 use Neomerx\JsonApi\Encoder\EncoderOptions;
@@ -23,7 +23,6 @@ class JsonApi
      */
     private $mapping = [
         DayType::class => DayTypeSchema::class,
-        ActiveYear::class => ActiveYearSchema::class,
         IrregularDayEntity::class => IrregularDaySchema::class
     ];
 

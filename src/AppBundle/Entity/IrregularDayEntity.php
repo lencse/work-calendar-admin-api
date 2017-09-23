@@ -6,7 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="irregular_days")
+ * @ORM\Table(
+ *     name="irregular_days",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(columns={"is_published", "date"})
+ *     },
+ *     indexes={
+ *         @ORM\Index(columns={"is_published"})
+ *     }
+ *  )
  */
 class IrregularDayEntity
 {
@@ -23,7 +31,7 @@ class IrregularDayEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="date", nullable=false, unique=true)
+     * @ORM\Column(type="date", nullable=false, unique=false)
      */
     private $date;
 
@@ -40,6 +48,13 @@ class IrregularDayEntity
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="is_published", nullable=false)
+     */
+    private $isPublished = false;
 
     /**
      * @return int
@@ -110,6 +125,24 @@ class IrregularDayEntity
     public function setDescription(string $description): IrregularDayEntity
     {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * @param bool $isPublished
+     * @return IrregularDayEntity
+     */
+    public function setIsPublished(bool $isPublished): IrregularDayEntity
+    {
+        $this->isPublished = $isPublished;
         return $this;
     }
 }

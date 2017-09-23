@@ -38,16 +38,7 @@ class IrregularDayController extends Controller
      */
     public function listAction(): Response
     {
-//        $date = \DateTime::createFromFormat('Y-m-d', substr('2017-09-15T00:00:00.000Z', 0, 10));
-//        dump($date); exit;
-
-//'2004-02-12T15:19:21+00:00';
-//'2017-09-06T00:00:00.000Z';
-
-
-//        dump(\DateTime::createFromFormat(\DateTime::ISO8601, '2004-02-12T15:19:21+00:00')); exit;
-//        dump(\DateTime::createFromFormat('Y-m-d', substr('2017-09-06T00:00:00.000Z', 0, 10))); exit;
-        $days = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->findAll();
+        $days = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->findBy(['isPublished' => false]);
         return $this->jsonApi->response($days);
     }
 
@@ -64,6 +55,7 @@ class IrregularDayController extends Controller
         $date->setTime(0, 0, 0);
         $day->setDate($date);
         $day->setTypeKey($data['attributes']['type-key']);
+        $day->setIsPublished(false);
         $day->setDescription(isset($data['attributes']['description']) ? $data['attributes']['description'] : '');
         $this->getDoctrine()->getManager()->persist($day);
         $this->getDoctrine()->getManager()->flush();
