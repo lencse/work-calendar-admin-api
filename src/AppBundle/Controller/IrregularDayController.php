@@ -121,8 +121,8 @@ class IrregularDayController extends Controller
     {
         $day = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->find($id);
         $this->getDoctrine()->getManager()->remove($day);
-        $this->getDoctrine()->getManager()->flush();
         $this->setDraft();
+        $this->getDoctrine()->getManager()->flush();
         return new Response(null, Response::HTTP_NO_CONTENT);
     }
 
