@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\PublicationData;
 use AppBundle\JsonApi\IrregularDaySchema;
 use AppBundle\JsonApi\JsonApi;
 use AppBundle\Entity\IrregularDayEntity;
@@ -58,8 +59,20 @@ class IrregularDayController extends Controller
         $day->setIsPublished(false);
         $day->setDescription(isset($data['attributes']['description']) ? $data['attributes']['description'] : '');
         $this->getDoctrine()->getManager()->persist($day);
+        $this->setDraft();
         $this->getDoctrine()->getManager()->flush();
         return $this->jsonApi->response($day);
+    }
+
+    private function setDraft()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $em->getRepository(PublicationData::class)->find(1);
+        if ($data->isDraft()) {
+            return;
+        }
+        $data->setIsDraft(true);
+        $em->persist($data);
     }
 
     /**
@@ -92,6 +105,7 @@ class IrregularDayController extends Controller
         $day->setDate($date);
         $day->setTypeKey($data['attributes']['type-key']);
         $this->getDoctrine()->getManager()->persist($day);
+        $this->setDraft();
         $this->getDoctrine()->getManager()->flush();
         return $this->jsonApi->response($day);
     }
@@ -108,6 +122,7 @@ class IrregularDayController extends Controller
         $day = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->find($id);
         $this->getDoctrine()->getManager()->remove($day);
         $this->getDoctrine()->getManager()->flush();
+        $this->setDraft();
         return new Response(null, Response::HTTP_NO_CONTENT);
     }
 

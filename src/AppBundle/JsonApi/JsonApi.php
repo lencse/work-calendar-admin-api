@@ -23,7 +23,8 @@ class JsonApi
      */
     private $mapping = [
         DayType::class => DayTypeSchema::class,
-        IrregularDayEntity::class => IrregularDaySchema::class
+        IrregularDayEntity::class => IrregularDaySchema::class,
+        PublicationData::class => PublicationDataSchema::class,
     ];
 
     public function __construct()

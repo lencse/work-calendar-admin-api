@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PublicationDataRepository")
  * @ORM\Table(name="publication_data")
  */
 class PublicationData
@@ -22,9 +22,9 @@ class PublicationData
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="date", name="publish_date")
+     * @ORM\Column(type="datetime", name="publication_date", nullable=true)
      */
-    private $publishDate;
+    private $publicationDate;
 
     /**
      * @var bool
@@ -44,18 +44,18 @@ class PublicationData
     /**
      * @return \DateTime
      */
-    public function getPublishDate(): \DateTime
+    public function getPublicationDate(): ?\DateTime
     {
-        return $this->publishDate;
+        return $this->publicationDate;
     }
 
     /**
-     * @param \DateTime $publishDate
+     * @param \DateTime $publicationDate
      * @return PublicationData
      */
-    public function setPublishDate(\DateTime $publishDate): PublicationData
+    public function setPublicationDate(\DateTime $publicationDate): PublicationData
     {
-        $this->publishDate = $publishDate;
+        $this->publicationDate = $publicationDate;
         return $this;
     }
 
