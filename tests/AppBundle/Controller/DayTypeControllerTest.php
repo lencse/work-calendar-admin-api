@@ -9,14 +9,14 @@ class DayTypeControllerTest extends WebTestCase
 
     public function testList()
     {
-        $data = $this->getJsonApiRepsonse('/day-type/');
-        $this->assertEquals(5, count($data));
+        $data = $this->getJsonApiRepsonse('/day-types/');
+        $this->assertEquals(3, count($data));
         $this->assertEquals($this->getExpected(), $this->findBy($data, 'id', 'relocated-working-day'));
     }
 
     public function testShow()
     {
-        $data = $this->getJsonApiRepsonse('/day-type/relocated-working-day');
+        $data = $this->getJsonApiRepsonse('/day-types/relocated-working-day');
         $this->assertEquals($this->getExpected(), $data);
     }
 
@@ -27,7 +27,7 @@ class DayTypeControllerTest extends WebTestCase
     private function getExpected(): array
     {
         return [
-            'type' => 'day-type',
+            'type' => 'day-types',
             'id' => 'relocated-working-day',
             'attributes' => [
                 'key' => 'relocated-working-day',
@@ -35,7 +35,7 @@ class DayTypeControllerTest extends WebTestCase
                 'is-rest-day' => false,
             ],
             'links' => [
-                'self' => '/api/day-type/relocated-working-day'
+                'self' => '/api/day-types/relocated-working-day'
             ],
         ];
     }
