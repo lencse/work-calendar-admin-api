@@ -68,6 +68,12 @@ class IrregularDayController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $data = $em->getRepository(PublicationData::class)->find(1);
+        if (empty($data)) {
+            $data = new PublicationData();
+            $data->setIsDraft(true);
+            $em->persist($data);
+            $em->flush();
+        }
         if ($data->isDraft()) {
             return;
         }

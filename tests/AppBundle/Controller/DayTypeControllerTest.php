@@ -2,9 +2,7 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class DayTypeControllerTest extends WebTestCase
+class DayTypeControllerTest extends ApiTestCase
 {
 
     public function testList()
@@ -19,7 +17,6 @@ class DayTypeControllerTest extends WebTestCase
         $data = $this->getJsonApiRepsonse('/day-types/relocated-working-day');
         $this->assertEquals($this->getExpected(), $data);
     }
-
 
     /**
      * @return array
@@ -38,35 +35,5 @@ class DayTypeControllerTest extends WebTestCase
                 'self' => '/api/day-types/relocated-working-day'
             ],
         ];
-    }
-
-    /**
-     * @param $url
-     * @return array
-     */
-    private function getJsonApiRepsonse($url): array
-    {
-        $client = static::createClient();
-        $client->request('GET', '/api' . $url);
-
-        $response = $client->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return json_decode($response->getContent(), true)['data'];
-    }
-
-    /**
-     * @param array $array
-     * @param string $key
-     * @param mixed $value
-     * @return mixed
-     */
-    private function findBy(array $array, $key, $value)
-    {
-        foreach ($array as $item) {
-            if ($item[$key] === $value) {
-                return $item;
-            }
-        }
     }
 }
