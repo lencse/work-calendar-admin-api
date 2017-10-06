@@ -10,7 +10,7 @@ class DayTypeControllerTest extends WebTestCase
     public function testList()
     {
         $data = $this->getJsonApiRepsonse('/day-types/');
-        $this->assertEquals(3, count($data));
+        $this->assertCount(3, $data);
         $this->assertEquals($this->getExpected(), $this->findBy($data, 'id', 'relocated-working-day'));
     }
 
