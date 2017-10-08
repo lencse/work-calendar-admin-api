@@ -6,14 +6,6 @@ cache:
         - $HOME/.composer/cache/files
 services:
     - postgresql
-env:
-    - WCADMINAPI_DB_HOST=localhost
-    - WCADMINAPI_DB_PORT=5432
-    - WCADMINAPI_DB_NAME=postgres
-    - WCADMINAPI_DB_USER=postgres
-    - WCADMINAPI_DB_PASSWORD=
-    - WCADMINAPI_SYMFONY_SECRET=5dd4e730b27106e262fce0e344bcdcff9634695a
-    - WCADMINAPI_FRONTEND_URL=http://localhost:8211
 before_install:
     - composer self-update
 before_script:
