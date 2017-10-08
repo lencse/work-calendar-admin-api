@@ -9,7 +9,6 @@ services:
 before_install:
     - composer self-update
 before_script:
-  - psql -c 'create database postgres;' -U postgres
   - composer install --no-interaction
 script:
     - composer test-all
