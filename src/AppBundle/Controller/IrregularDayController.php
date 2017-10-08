@@ -39,7 +39,8 @@ class IrregularDayController extends Controller
      */
     public function listAction(): Response
     {
-        $days = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->findBy(['isPublished' => false]);
+        $repository = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class);
+        $days = $repository->findBy(['isPublished' => false]);
         return $this->jsonApi->response($days);
     }
 
@@ -53,7 +54,7 @@ class IrregularDayController extends Controller
         $day = new IrregularDayEntity();
         $data = json_decode($request->getContent(), true)['data'];
         $date = \DateTime::createFromFormat('Y-m-d', substr($data['attributes']['date'], 0, 10));
-        $date->setTime(0, 0, 0);
+        $date->setTime(0, 0);
         $day->setDate($date);
         $day->setTypeKey($data['attributes']['type-key']);
         $day->setIsPublished(false);
@@ -106,6 +107,7 @@ class IrregularDayController extends Controller
         $day = $this->getDoctrine()->getManager()->getRepository(IrregularDayEntity::class)->find($id);
         $data = json_decode($request->getContent(), true)['data'];
         $date = \DateTime::createFromFormat('Y-m-d', substr($data['attributes']['date'], 0, 10));
+        $date->setTime(0, 0);
         $day->setTypeKey($data['attributes']['type-key']);
         $day->setDescription($data['attributes']['description']);
         $day->setDate($date);
@@ -139,7 +141,7 @@ class IrregularDayController extends Controller
      * @param int $id
      * @return Response
      */
-    public function optionsAction($id): Response
+    public function optionsAction(): Response
     {
         return new Response('', Response::HTTP_OK, [
             'Access-Control-Allow-Methods' => 'OPTIONS, GET, PUT, DELETE',

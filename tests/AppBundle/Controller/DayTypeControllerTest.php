@@ -7,14 +7,14 @@ class DayTypeControllerTest extends ApiTestCase
 
     public function testList()
     {
-        $data = $this->getJsonApiRepsonse('/day-types/');
+        $data = $this->getJsonApiResponse('/day-types/');
         $this->assertCount(3, $data);
         $this->assertEquals($this->getExpected(), $this->findBy($data, 'id', 'relocated-working-day'));
     }
 
     public function testShow()
     {
-        $data = $this->getJsonApiRepsonse('/day-types/relocated-working-day');
+        $data = $this->getJsonApiResponse('/day-types/relocated-working-day');
         $this->assertEquals($this->getExpected(), $data);
     }
 

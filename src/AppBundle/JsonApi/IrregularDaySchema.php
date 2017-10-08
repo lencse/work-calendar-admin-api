@@ -52,6 +52,8 @@ class IrregularDaySchema extends SchemaProvider
      * @param array $includeRelationships A list of relationships that will be included as full resources.
      *
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getRelationships($resource, $isPrimary, array $includeRelationships)
     {
@@ -69,6 +71,4 @@ class IrregularDaySchema extends SchemaProvider
     {
         return ['day-type'];
     }
-
-
 }

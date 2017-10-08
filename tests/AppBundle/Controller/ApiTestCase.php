@@ -4,6 +4,7 @@ namespace Tests\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Tests\AppBundle\AppSetup;
 
@@ -32,7 +33,7 @@ abstract class ApiTestCase extends WebTestCase
      * @param $url
      * @return array
      */
-    protected function getJsonApiRepsonse($url): array
+    protected function getJsonApiResponse($url): array
     {
         $client = $this->getClient();
         $client->request('GET', '/api' . $url);
@@ -53,7 +54,7 @@ abstract class ApiTestCase extends WebTestCase
         $client = $this->getClient();
         $client->request(
             'POST',
-            '/api/irregular-days/',
+            '/api' . $url,
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
@@ -64,6 +65,57 @@ abstract class ApiTestCase extends WebTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         return json_decode($response->getContent(), true)['data'];
+    }
+
+    /**
+     * @param $url string
+     * @param array $data
+     * @return array
+     */
+    protected function putJsonApiRepsonse($url, array $data): array
+    {
+        $client = $this->getClient();
+        $client->request(
+            'PUT',
+            '/api' . $url,
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode($data)
+        );
+
+        $response = $client->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return json_decode($response->getContent(), true)['data'];
+    }
+
+    /**
+     * @param $url string
+     * @return void
+     */
+    protected function deleteJsonApiRepsonse($url): void
+    {
+        $client = $this->getClient();
+        $client->request('DELETE', '/api' . $url);
+
+        $response = $client->getResponse();
+        $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    /**
+     * @param $url string
+     * @return ResponseHeaderBag
+     */
+    protected function optionsRepsonse($url): ResponseHeaderBag
+    {
+        $client = $this->getClient();
+        $client->request('OPTIONS', '/api' . $url);
+
+        $response = $client->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response->headers;
     }
 
     /**
