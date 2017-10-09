@@ -37,12 +37,12 @@ security:
             anonymous: ~
             form_login:
                 login_path: wcadmin_security_login
-                check_path: wcadmin_security_login
-                csrf_token_generator: security.csrf.token_manager
+                check_path: wcadmin_security_login_check
+#                csrf_token_generator: security.csrf.token_manager
             logout:
                 path: /logout
                 target: /
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/api, roles: ROLE_USER }

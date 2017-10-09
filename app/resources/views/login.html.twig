@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="{{ _charset }}" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title></title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <form action="{{ path('wcadmin_security_login_check') }}" method="post">
+
+        {% if error %}
+            <div>
+                {{ error.message }}
+            </div>
+        {% endif %}
+
+        <div class="mdl-card__supporting-text">
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input
+                            class="mdl-textfield__input"
+                            type="text"
+                            id="username"
+                            name="_username"
+                    />
+                    <label class="mdl-textfield__label" for="email">Email</label>
+                </div>
+            </div>
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input
+                            class="mdl-textfield__input"
+                            type="password"
+                            id="password"
+                            name="_password"
+                    />
+                    <label class="mdl-textfield__label" htmlFor="username">Jelszó</label>
+                </div>
+            </div>
+        </div>
+
+        {#<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />#}
+
+        <div class="mdl-card__actions mdl-card--border">
+            <button type="submit" class="mdl-button color-text--teal mdl-js-button mdl-js-ripple-effect pull-right">
+                Bejelentkezés
+            </button>
+            <div class="clearfix"></div>
+        </div>
+
+    </form>
+
+{{ include('@Twig/base_js.html.twig') }}
+</body>
+</html>
