@@ -65,16 +65,6 @@ class IrregularDayEntity
     }
 
     /**
-     * @param int $id
-     * @return IrregularDayEntity
-     */
-    public function setId(string $id): IrregularDayEntity
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getDate(): \DateTime
@@ -126,14 +116,6 @@ class IrregularDayEntity
     {
         $this->description = $description;
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPublished(): bool
-    {
-        return $this->isPublished;
     }
 
     /**
