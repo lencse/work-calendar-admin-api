@@ -2,24 +2,21 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class DayTypeControllerTest extends WebTestCase
+class DayTypeControllerTest extends ApiTestCase
 {
 
     public function testList()
     {
-        $data = $this->getJsonApiRepsonse('/day-type/');
-        $this->assertEquals(5, count($data));
+        $data = $this->getJsonApiResponse('/day-types/');
+        $this->assertCount(3, $data);
         $this->assertEquals($this->getExpected(), $this->findBy($data, 'id', 'relocated-working-day'));
     }
 
     public function testShow()
     {
-        $data = $this->getJsonApiRepsonse('/day-type/relocated-working-day');
+        $data = $this->getJsonApiResponse('/day-types/relocated-working-day');
         $this->assertEquals($this->getExpected(), $data);
     }
-
 
     /**
      * @return array
@@ -27,7 +24,7 @@ class DayTypeControllerTest extends WebTestCase
     private function getExpected(): array
     {
         return [
-            'type' => 'day-type',
+            'type' => 'day-types',
             'id' => 'relocated-working-day',
             'attributes' => [
                 'key' => 'relocated-working-day',
@@ -35,38 +32,8 @@ class DayTypeControllerTest extends WebTestCase
                 'is-rest-day' => false,
             ],
             'links' => [
-                'self' => '/api/day-type/relocated-working-day'
+                'self' => '/api/day-types/relocated-working-day'
             ],
         ];
-    }
-
-    /**
-     * @param $url
-     * @return array
-     */
-    private function getJsonApiRepsonse($url): array
-    {
-        $client = static::createClient();
-        $client->request('GET', '/api' . $url);
-
-        $response = $client->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return json_decode($response->getContent(), true)['data'];
-    }
-
-    /**
-     * @param array $array
-     * @param string $key
-     * @param mixed $value
-     * @return mixed
-     */
-    private function findBy(array $array, $key, $value)
-    {
-        foreach ($array as $item) {
-            if ($item[$key] === $value) {
-                return $item;
-            }
-        }
     }
 }

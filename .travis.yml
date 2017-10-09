@@ -4,9 +4,11 @@ php:
 cache:
     directories:
         - $HOME/.composer/cache/files
+services:
+    - postgresql
 before_install:
     - composer self-update
 before_script:
-    - composer install --no-interaction
+  - composer install --no-interaction
 script:
     - composer test-all

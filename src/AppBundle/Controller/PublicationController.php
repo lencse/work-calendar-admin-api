@@ -38,7 +38,7 @@ class PublicationController extends Controller
      */
     public function getDataAction(): Response
     {
-        $data = $this->getDoctrine()->getManager()->getRepository(PublicationData::class)->find(1);
+        $data = $this->getDoctrine()->getManager()->getRepository(PublicationData::class)->getPublicationData();
         return $this->jsonApi->response($data);
     }
 
@@ -50,7 +50,7 @@ class PublicationController extends Controller
     public function publishAction(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository(PublicationData::class)->find(1);
+        $data = $em->getRepository(PublicationData::class)->getPublicationData();
         $toDelete = $em->getRepository(IrregularDayEntity::class)->findBy(['isPublished' => true]);
         foreach ($toDelete as $item) {
             $em->remove($item);
@@ -83,7 +83,7 @@ class PublicationController extends Controller
     public function resetAction(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository(PublicationData::class)->find(1);
+        $data = $em->getRepository(PublicationData::class)->getPublicationData();
         $toDelete = $em->getRepository(IrregularDayEntity::class)->findBy(['isPublished' => false]);
         foreach ($toDelete as $item) {
             $em->remove($item);

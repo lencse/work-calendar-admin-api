@@ -21,6 +21,8 @@ class PublicationDataSchema extends SchemaProvider
      * @param PublicationData $resource
      *
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getId($resource)
     {
