@@ -34,9 +34,21 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    wcadmin_kernel_listener:
-        class: AppBundle\Event\KernelListener
+    AppBundle\Event\KernelListener:
         arguments:
             - '%frontend_url%'
         tags:
             - { name: kernel.event_listener, event: kernel.response }
+            - { name: kernel.event_listener, event: kernel.request }
+
+    League\OAuth2\Client\Provider\Google:
+        arguments:
+            0:
+                clientId: '471125045048-jf7tugslk64efdhpp9fo3khei0spb0op.apps.googleusercontent.com'
+                clientSecret: 'cwhxC_4FF8NVFvTrUANEr56G'
+                redirectUri: 'http://localhost:8210/app_dev.php/auth/callback'
+                hostedDomain: 'http://localhost:8211'
+
+    AppBundle\Auth\UserManager:
+        arguments:
+            - '%frontend_url%'

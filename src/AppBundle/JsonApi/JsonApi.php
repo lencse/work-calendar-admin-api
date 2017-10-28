@@ -2,6 +2,7 @@
 
 namespace AppBundle\JsonApi;
 
+use AppBundle\Auth\User;
 use AppBundle\Entity\IrregularDayEntity;
 use AppBundle\Entity\PublicationData;
 use Lencse\WorkCalendar\Day\DayType;
@@ -25,6 +26,7 @@ class JsonApi
         DayType::class => DayTypeSchema::class,
         IrregularDayEntity::class => IrregularDaySchema::class,
         PublicationData::class => PublicationDataSchema::class,
+        User::class => UserSchema::class,
     ];
 
     public function __construct()
